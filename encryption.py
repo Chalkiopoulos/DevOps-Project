@@ -14,4 +14,4 @@ def encrypt(plaintext):
     byte_plaintext = plaintext.encode()
     cyphertext = f.encrypt(byte_plaintext)
 
-    print("the encrypted phrase is: ", cyphertext) 
+    return(cyphertext)

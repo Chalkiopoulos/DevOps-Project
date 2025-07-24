@@ -6,6 +6,7 @@ from create_key import create_key
 plaintext= input("Type the phrase you want to encrypt: ")
 print("You typed", plaintext)
 
-encrypt(plaintext)
+c=encrypt(plaintext)
+print(c)
 
 
