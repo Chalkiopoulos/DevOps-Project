@@ -1,15 +1,29 @@
-print ("hello world")
+from cryptography.fernet import Fernet
 
-for i in range (5):
-    print (i, " hello world")
+plaintext_names = ["nick", "alex", "thanos", "makis"]
+encrypted_names = []
 
-A = ["nick", "alex", "thanos", "makis"]
+list.sort(plaintext_names) # sort the names
 
-for name in A:
+#generate the encryption key
+
+key = Fernet.generate_key()
+f=Fernet(key)
+print("the key in use is ", key)
+
+#print the plaintext names
+print("the plaintext names are: ")
+for name in plaintext_names:
     print(name)
 
-list.sort(A)
-for name in A:
-    print(name)
+#encrypt the names
 
-# hello world
+for name in plaintext_names:
+    b_name= name.encode()
+    k=f.encrypt(b_name)
+    encrypted_names.append(k)
+
+#print encrypted names
+print("the encrypted names are: ") 
+for name in encrypted_names:
+    print(name)
