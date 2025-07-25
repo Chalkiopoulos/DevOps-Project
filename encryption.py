@@ -18,7 +18,7 @@ def encrypt(plaintext):
     return(cyphertext)
 
 def decrypt(cyphertext):
-
+#this checks if the key exists
     if not os.path.exists("filekey.key"):
         print("Key file does not exist, cannot decrypt")
         return
