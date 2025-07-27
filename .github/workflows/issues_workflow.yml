@@ -5,5 +5,5 @@ jobs:
         runs-on: windows-latest
         steps:
             - name: print the details
-              run: echo "${{ github.event }}"
+              run: echo "${{ toJson(github.event)}}"
 
