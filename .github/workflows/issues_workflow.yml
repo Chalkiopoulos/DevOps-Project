@@ -1,0 +1,9 @@
+name: issues workflow
+on: issues
+jobs:
+    print_some_event_details:
+        runs-on: windows-latest
+        steps:
+            - name: print the details
+              run: type "%GITHUB_EVENT_PATH"
+
