@@ -1,10 +1,14 @@
 name: push-workflow
 on: push
 jobs:
-  get-the-code:
-    runs-on: ubuntu-latest
+  run_the_code:
+    runs-on: windows-latest
     steps:
-      - name: get-the-code
+      - name: get the code
         uses: actions/checkout@v4
-      - name: run-the-code
-        run: python main.py
+      - name: make a key
+        run: python create_key.py
+      - name: download dependencies
+        run: pip install cryptography 45.0.5
+      - name: execute main
+        run: python
