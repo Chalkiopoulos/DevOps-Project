@@ -1,0 +1,30 @@
+name: workflow-dispatch-parallel-test
+on: workflow_dispatch
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            -name: echo first 10 numbers
+            run: echo "job1 here"
+
+    job2:
+        runs-on: ubuntu-latest
+        steps:
+            -name: echo first 10 numbers
+            run: echo "job2 here"
+    job3:
+        runs-on: ubuntu-latest
+        steps:
+            -name: echo first 10 numbers
+            run: echo "job3 here"
+    job4:
+        runs-on: ubuntu-latest
+        steps:
+            -name: echo first 10 numbers
+            run: echo "job4 here"
+    job5:
+        runs-on: ubuntu-latest
+        needs: [job1,job2,job3,job4]
+        steps:
+            -name: echo first 10 numbers
+            run: echo "job4 here"
