@@ -1,10 +1,11 @@
-name: First Workflow
-on: workflow_dispatch
+name: test_workflow
+on: [push,workflow_dispatch]
 jobs:
-  first-job:
+  get-the-code:
     runs-on: ubuntu-latest
     steps:
-      - name: Print greeting
-        run: echo "Hello World!"
-      - name: Print goodbye
-        run: echo "Done - bye!"
+      - name: get-the-code
+        uses: actions/checkout@v4
+      - name: run-the-code
+        run: python main.py
+
