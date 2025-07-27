@@ -6,9 +6,9 @@ jobs:
     steps:
       - name: get the code
         uses: actions/checkout@v4
-      - name: make a key
-        run: python create_key.py
       - name: download dependencies
         run: pip install cryptography 45.0.5
+      - name: make a key
+        run: python create_key.py
       - name: execute main
         run: python
