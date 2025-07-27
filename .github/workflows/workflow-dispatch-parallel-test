@@ -1,5 +1,5 @@
 name: workflow-dispatch-parallel-test
-on: workflow_dispatch
+on: [workflow_dispatch, push]
 jobs:
     job1:
         runs-on: ubuntu-latest
@@ -27,4 +27,4 @@ jobs:
         needs: [job1,job2,job3,job4]
         steps:
             -name: echo first 10 numbers
-            run: echo "job4 here"
+            run: echo "job5 here"
