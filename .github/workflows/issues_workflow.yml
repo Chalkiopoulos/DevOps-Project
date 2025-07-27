@@ -5,5 +5,5 @@ jobs:
         runs-on: windows-latest
         steps:
             - name: print the details
-              run: type "%GITHUB_EVENT_PATH"
+              run: echo "${{ github.event }}"
 
