@@ -1,5 +1,5 @@
-name: test_workflow
-on: [push,workflow_dispatch]
+name: push-workflow
+on: push
 jobs:
   get-the-code:
     runs-on: ubuntu-latest
