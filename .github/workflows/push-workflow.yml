@@ -6,9 +6,12 @@ jobs:
     steps:
       - name: get the code
         uses: actions/checkout@v4
-      - name: download dependencies
+
+      - name: install dependencies
         run: pip install cryptography
+
       - name: make a key
         run: python create_key.py
-      - name: python main.py
-        run: python
+
+      - name: execute code
+        run: python main.py
