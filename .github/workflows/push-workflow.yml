@@ -10,6 +10,8 @@ on:
 jobs:
   run_to_artifact:
     runs-on: ubuntu-latest
+    outputs: 
+      number_of_lines: ${{steps.line-count.outputs}}
     steps:
       - name: get the code
         uses: actions/checkout@v4
@@ -31,6 +33,10 @@ jobs:
         with:
           name: encryptions
           path: ./encrypted_passwords.txt
+      
+      - name: publish number of encryptions
+        id: line-count
+        run: cat ./encrypted_passwords.txt | wc -l >> "$GITHUB_OUTPUT"
 
   print_information:
     runs-on: Ubuntu-latest
