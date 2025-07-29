@@ -1,5 +1,6 @@
 name: push-workflow
 on: 
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -29,4 +30,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: encryptions
-          path: .
+          path: ./encrypted_passwords.txt
