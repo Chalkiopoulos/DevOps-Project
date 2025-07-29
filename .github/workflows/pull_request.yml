@@ -6,10 +6,10 @@ on:
             - main
 jobs:
     give_details:
-        runs-on: Ubuntu latest
+        runs-on: Ubuntu-latest
         steps:
             - name: print the details
-              run: echo " ... some details"
+              run: echo """${{ toJson(github.event)}}"""
     
     friendly_text:
         runs-on: Ubuntu-latest
