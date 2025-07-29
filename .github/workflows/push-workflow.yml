@@ -36,7 +36,9 @@ jobs:
       
       - name: publish number of encryptions
         id: line-count
-        run: cat ./encrypted_passwords.txt | wc -l >> "$GITHUB_OUTPUT"
+        run: |
+          line_count=$(cat ./encrypted_passwords.txt | wc -l)
+          echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
 
   print_information:
     runs-on: Ubuntu-latest
