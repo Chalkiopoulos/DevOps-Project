@@ -6,7 +6,7 @@ on:
             - main
 jobs:
     give_detailes:
-        runs-on: Ubuntu latest
+        runs-on: Ubuntu-latest
         steps:
             - name: print the details
               run: echo "${{ toJson(github.event)}}"
