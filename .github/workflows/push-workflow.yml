@@ -4,7 +4,8 @@ on:
     branches:
       - main
     paths-ignore:
-      - .github\workflows\**
+      - '.github\workflows\**'
+      - '*.md'
 
 jobs:
   run_the_code:
