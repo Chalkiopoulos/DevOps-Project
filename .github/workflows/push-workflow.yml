@@ -21,7 +21,7 @@ jobs:
           key: cryptography-${{ runner.os }}-${{ hashFiles('dependencies.txt') }}
 
       - name: install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r dependencies.txt
 
       - name: make a key
         run: python create_key.py
@@ -45,7 +45,7 @@ jobs:
           key: cryptography-${{ runner.os }}-${{ hashFiles('dependencies.txt') }}
 
       - name: install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r dependencies.txt
 
       - name: make a key
         run: python create_key.py
