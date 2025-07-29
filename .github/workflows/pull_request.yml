@@ -9,7 +9,7 @@ jobs:
         runs-on: Ubuntu latest
         steps:
             - name: print the details
-              run: echo "${{ toJson(github.event)}}"
+              run: echo " ... some details"
     
     friendly_text:
         runs-on: Ubuntu-latest
