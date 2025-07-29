@@ -5,7 +5,7 @@ on:
         branches:
             - main
 jobs:
-    give_detailes:
+    give_details:
         runs-on: Ubuntu latest
         steps:
             - name: print the details
