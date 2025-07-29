@@ -21,5 +21,5 @@ with open('encrypted_passwords.txt', 'w') as f:
 
         # this plays with the pyfiglet lib 
 
-ascii_banner = pyfiglet.figlet_format("Hello, World!")
+ascii_banner = pyfiglet.figlet_format("CI/CD IS COOL")
 print(ascii_banner)

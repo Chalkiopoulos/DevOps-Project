@@ -20,5 +20,5 @@ print(P)
 
 # this plays with the pyfiglet lib 
 
-ascii_banner = pyfiglet.figlet_format("Hello, World!")
+ascii_banner = pyfiglet.figlet_format("TESTS ARE COOL")
 print(ascii_banner)
