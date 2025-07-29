@@ -8,7 +8,7 @@ on:
       - '*.md'
 
 jobs:
-  run_to_artifact:
+  run_to_upload_artifact:
     runs-on: ubuntu-latest
     outputs: 
       number_of_lines: ${{steps.line-count.outputs.line_count}}
@@ -42,7 +42,7 @@ jobs:
 
   download_and_show_artifact:
     runs-on: Ubuntu-latest
-    needs: run_to_artifact
+    needs: run_to_upload_artifact
     steps:
       - name: download encryptions
         uses: actions/download-artifact@v4
@@ -50,7 +50,7 @@ jobs:
           name: encryptions
       
       - name: print number of lines from output
-        run: echo "this file contains ${{needs.run_to_artifact.outputs.number_of_lines}} encrypted passwords"
+        run: echo "this file contains ${{needs.run_to_upload_artifact.outputs.number_of_lines}} encrypted passwords"
       
       - name: print_contents
         run: cat ./encrypted_passwords.txt
