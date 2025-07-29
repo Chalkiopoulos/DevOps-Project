@@ -52,8 +52,7 @@ jobs:
         run: |
           line_count=$(cat ./encrypted_passwords.txt | wc -l)
           echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
-    
-
+   
   download_and_show_artifact: # this job shocases how to download artiacts and also how to get oututs from another job
     runs-on: Ubuntu-latest
     needs: Build_and_upload_encryptions
