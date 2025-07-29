@@ -11,7 +11,7 @@ jobs:
   run_to_artifact:
     runs-on: ubuntu-latest
     outputs: 
-      number_of_lines: ${{steps.line-count.outputs}}
+      number_of_lines: ${{steps.line-count.outputs.line_count}}
     steps:
       - name: get the code
         uses: actions/checkout@v4
