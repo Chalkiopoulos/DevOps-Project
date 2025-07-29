@@ -8,7 +8,7 @@ on:
       - '*.md'
 
 jobs:
-  run_the_code:
+  run_to_artifact:
     runs-on: ubuntu-latest
     steps:
       - name: get the code
@@ -31,3 +31,19 @@ jobs:
         with:
           name: encryptions
           path: ./encrypted_passwords.txt
+
+  print_information:
+    runs-on: Ubuntu-latest
+    needs: run_to_artifact
+    steps:
+      - name: download encryptions
+        uses: actions/download_artifact@v4
+        with:
+          name: encryptions
+      
+      - name: print_contents
+        run: cat ./encrypted_passwords.txt
+
+      
+
+    
