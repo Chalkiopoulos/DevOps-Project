@@ -18,7 +18,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key:  cryptography-${{ runner.os }}-${{ hashFiles('cryptography') }}
+          key: cryptography-${{ runner.os }}-${{ hashFiles('dependencies.txt') }}
 
       - name: install dependencies
         run: pip install cryptography
@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key:  cryptography-${{ runner.os }}-${{ hashFiles('cryptography') }}
+          key: cryptography-${{ runner.os }}-${{ hashFiles('dependencies.txt') }}
 
       - name: install dependencies
         run: pip install cryptography
