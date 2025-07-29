@@ -4,12 +4,12 @@ on:
     branches:
       - main
     paths-ignore:
-      - '.github\workflows\**'
+      - '.github/workflows/*'
       - '*.md'
 
 jobs:
   run_the_code:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: get the code
         uses: actions/checkout@v4
