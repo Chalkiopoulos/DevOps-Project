@@ -1,5 +1,11 @@
 name: push-workflow
-on: push
+on: 
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .github\workflows\**
+
 jobs:
   run_the_code:
     runs-on: windows-latest
