@@ -40,7 +40,7 @@ jobs:
           line_count=$(cat ./encrypted_passwords.txt | wc -l)
           echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
 
-  print_information:
+  download_and_show_artifact:
     runs-on: Ubuntu-latest
     needs: run_to_artifact
     steps:
@@ -48,6 +48,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: encryptions
+      
+      - name: print number of lines from output
+        run: echo "this file contains ${{needs.run_to_artifact.outputs.number_of_lines}} encrypted passwords"
       
       - name: print_contents
         run: cat ./encrypted_passwords.txt
