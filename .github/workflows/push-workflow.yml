@@ -7,8 +7,8 @@ on:
     paths-ignore:
       - '*.md'
 
-jobs:
-  run_to_upload_artifact:
+jobs:   
+  run_to_upload_artifact:     # this job showcases how to get code, install dependencies, test it, upload it as an artifact and finially give output
     runs-on: ubuntu-latest
     outputs: 
       number_of_lines: ${{steps.line-count.outputs.line_count}}
@@ -40,7 +40,7 @@ jobs:
           line_count=$(cat ./encrypted_passwords.txt | wc -l)
           echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
 
-  download_and_show_artifact:
+  download_and_show_artifact: # this job shocases how to download artiacts and also how to get oututs from another job
     runs-on: Ubuntu-latest
     needs: run_to_upload_artifact
     steps:
