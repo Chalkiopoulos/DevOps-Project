@@ -15,7 +15,7 @@ P=[]
 print(A)
 C=encrypt_list(A)
 print(C)
-#P = decrypt_list(C)
+P = decrypt_list(C)
 print(P)
 
 if A!=P:
