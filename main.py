@@ -23,3 +23,6 @@ with open('encrypted_passwords.txt', 'w') as f:
 
 ascii_banner = pyfiglet.figlet_format("CI/CD IS COOL")
 print(ascii_banner)
+
+
+raise Exception("Something went wrong ON PURPOSE")
