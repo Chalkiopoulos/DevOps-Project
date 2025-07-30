@@ -18,6 +18,9 @@ print(C)
 P = decrypt_list(C)
 print(P)
 
+if A!=P:
+    raise Exception("Encryption went wrong")
+
 # this plays with the pyfiglet lib 
 
 ascii_banner = pyfiglet.figlet_format("TESTS ARE COOL")
