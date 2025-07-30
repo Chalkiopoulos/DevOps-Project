@@ -7,11 +7,10 @@ from encryption_list import decrypt_list
 import os
 import pyfiglet
 
+with open("passwords.txt", "r") as f:       #reads the passwords
+    passwords = [line.strip() for line in f]
 
-A=["123456","password","123456789","12345678","12345","qwerty","abc123","football","monkey","letmein","admin","welcome","login","princess","dragon","passw0rd","master","hello","freedom","whatever","qazwsx","trustno1","654321","123123"]
-
-C=encrypt_list(A)
-
+C=encrypt_list(passwords)
 # write the encrypted passwords in a file
 
 with open('encrypted_passwords.txt', 'w') as f:
