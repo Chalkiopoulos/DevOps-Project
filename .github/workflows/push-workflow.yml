@@ -1,6 +1,5 @@
 name: push-workflow
-env: 
-  environment_value: ------------This is the repository wide value------------
+
 on: 
   workflow_dispatch:
   push:
