@@ -86,6 +86,16 @@ jobs:
       
       - name: print_contents
         run: cat ./encrypted_passwords.txt
+  
+  fail_report:
+    runs-on: Ubuntu-latest
+    needs: [test_code, Build_and_upload_encryptions,download_and_show_artifact]
+    if: failure()
+    steps:
+      - name: print the full report
+        run: echo "${{github}}"
+
+  
 
       
 
