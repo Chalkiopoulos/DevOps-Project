@@ -31,7 +31,7 @@ jobs:
       - name: test code
         run: python test.py
       - name: check environment value
-        run: echo "${{env.ENVIRONMENT_VALUE}}"
+        run: echo ${{ vars.ENVIRONMENT_VALUE }}
       
   Build_and_upload_encryptions:  #encryptions work somewhat like a build that I upload as an artifact, here i also publish some output of the number of encryptiosn
     needs: test_code
@@ -58,7 +58,7 @@ jobs:
         run: python main.py
       
       - name: check environment value
-        run: echo "hello $ENVIRONMENT_VALUE"
+        run: echo ${{ vars.ENVIRONMENT_VALUE }}
       
       - name: upload the encryptions
         uses: actions/upload-artifact@v4
