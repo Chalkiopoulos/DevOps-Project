@@ -71,8 +71,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: encryptions
-          path: ./encrypted_passwords.txt
-      
+          path: ./encrypted_passwords${{ matrix.operating_system }}.txt
+
       - name: publish number of encryptions # I count the number of passwords encrypted to learn about github outputs
         id: counter
         run: |
