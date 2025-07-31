@@ -39,7 +39,10 @@ jobs:
       
   Build_and_upload_encryptions:  #encryptions work somewhat like a build that I upload as an artifact, here i also publish some output of the number of encryptiosn
     needs: test_code
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        operating_system: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.operating_system }}
     outputs: 
       number_of_lines: ${{steps.counter.outputs.line_count}}
     steps:
