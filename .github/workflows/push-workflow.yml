@@ -10,8 +10,12 @@ on:
 
 jobs:
   test_code:
+    strategy:
+      matrix:
+        operating_system: [ubuntu-latest, windows-latest, macos-latest]
+
     environment: Testing
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating_system }}
     steps:
       - name: get the code
         uses: actions/checkout@v4
