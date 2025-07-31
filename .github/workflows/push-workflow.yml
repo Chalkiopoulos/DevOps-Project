@@ -43,6 +43,9 @@ jobs:
       matrix:
         operating_system: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.operating_system }}
+    defaults:
+      run:
+        shell: bash
     outputs: 
       number_of_lines: ${{steps.counter.outputs.line_count}}
     steps:
@@ -80,8 +83,14 @@ jobs:
           echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
    
   download_and_show_artifact: # this job showcases how to download artiacts and also how to get oututs from another job
-    runs-on: Ubuntu-latest
+    strategy:
+      matrix:
+        operating_system: [ubuntu-latest, windows-latest]
+    runs-on: ${{matrix.operating_system}}
     needs: Build_and_upload_encryptions
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: download encryptions
         uses: actions/download-artifact@v4
