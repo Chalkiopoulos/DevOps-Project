@@ -70,7 +70,7 @@ jobs:
       - name: upload the encryptions
         uses: actions/upload-artifact@v4
         with:
-          name: encryptions
+          name: 'encryptions-${{ matrix.operating_system }}'
           path: ./encrypted_passwords*.txt
 
       - name: publish number of encryptions # I count the number of passwords encrypted to learn about github outputs
@@ -86,13 +86,13 @@ jobs:
       - name: download encryptions
         uses: actions/download-artifact@v4
         with:
-          name: encryptions
+          name: 'encryptions-${{ matrix.operating_system }}'
       
       - name: print number of lines from output
         run: echo "this file contains ${{needs.Build_and_upload_encryptions.outputs.number_of_lines}} encrypted passwords"
       
       - name: print_contents
-        run: cat ./encrypted_passwords${{ matrix.operating_system }}.txt
+        run: cat ./encrypted_passwords*.txt
 
   fail_report:
     runs-on: Ubuntu-latest
