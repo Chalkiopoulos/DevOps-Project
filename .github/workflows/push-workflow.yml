@@ -12,7 +12,7 @@ jobs:
   test_code:
     strategy:
       matrix:
-        operating_system: [ubuntu-latest, windows-latest, macos-latest]
+        operating_system: [ubuntu-latest, windows-latest]
 
     environment: Testing
     runs-on: ${{ matrix.operating_system }}
@@ -41,7 +41,7 @@ jobs:
     needs: test_code
     strategy:
       matrix:
-        operating_system: [ubuntu-latest, windows-latest, macos-latest]
+        operating_system: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.operating_system }}
     outputs: 
       number_of_lines: ${{steps.counter.outputs.line_count}}
@@ -71,12 +71,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: encryptions
-          path: ./encrypted_passwords${{ matrix.operating_system }}.txt
+          path: ./encrypted_passwords*.txt
 
       - name: publish number of encryptions # I count the number of passwords encrypted to learn about github outputs
         id: counter
         run: |
-          line_count=$(cat ./encrypted_passwords.txt | wc -l)
+          line_count=$(cat ./encrypted_passwords*.txt | wc -l)
           echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
    
   download_and_show_artifact: # this job showcases how to download artiacts and also how to get oututs from another job
@@ -92,8 +92,8 @@ jobs:
         run: echo "this file contains ${{needs.Build_and_upload_encryptions.outputs.number_of_lines}} encrypted passwords"
       
       - name: print_contents
-        run: cat ./encrypted_passwords.txt
-  
+        run: cat ./encrypted_passwords${{ matrix.operating_system }}.txt
+
   fail_report:
     runs-on: Ubuntu-latest
     needs: [test_code, Build_and_upload_encryptions,download_and_show_artifact]
