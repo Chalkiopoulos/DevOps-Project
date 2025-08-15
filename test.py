@@ -8,6 +8,7 @@ import pyfiglet
 import os
 # this is a mock test to check if encryption is running fine before writing to the file
 
+create_key()
 with open("passwords.txt", "r") as f:       #reads the passwords
     passwords = [line.strip() for line in f]
 

@@ -7,6 +7,9 @@ from encryption_list import decrypt_list
 import platform
 import pyfiglet
 
+
+create_key()
+
 os_name = platform.system() #gets the name of the operating system
 
 encryption_file_name = f"encrypted_passwords_{os_name}.txt"
