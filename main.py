@@ -8,6 +8,7 @@ import platform
 import pyfiglet
 
 os_name = platform.system() #gets the name of the operating system
+
 encryption_file_name = f"encrypted_passwords_{os_name}.txt"
 with open("passwords.txt", "r") as f:       #reads the passwords
     passwords = [line.strip() for line in f]

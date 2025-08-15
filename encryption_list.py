@@ -5,7 +5,10 @@ import os
 def encrypt_list(list):
     cyphertext_list=[]
     #generate the encryption key if it doesnt exist, this checks if it already exists
-    create_key()
+    
+
+    if not os.path.exists("filekey.key"):
+        raise FileNotFoundError("Key file does not exist, cannot encrypt")
 
     #load the key
     with open("filekey.key", "rb") as key_file:

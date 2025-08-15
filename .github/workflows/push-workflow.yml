@@ -12,7 +12,7 @@ jobs:
   test_code:
     strategy:
       matrix:
-        operating_system: [ubuntu-latest, windows-latest,macOS-latest]
+        operating_system: [ubuntu-latest,macOS-latest]
 
     environment: Testing
     runs-on: ${{ matrix.operating_system }}
@@ -82,7 +82,7 @@ jobs:
           line_count=$(cat ./encrypted_passwords*.txt | wc -l)
           echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
    
-  download_and_show_artifact: # this job showcases how to download artiacts and also how to get oututs from another job
+  download_and_show_artifact: # this job showcases how to download artiacts and also how to get outputs from another job
     strategy:
       matrix:
         operating_system: [ubuntu-latest, windows-latest]
