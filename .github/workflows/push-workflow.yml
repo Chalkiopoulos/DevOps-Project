@@ -16,6 +16,7 @@ jobs:
 
     environment: Testing
     runs-on: ${{ matrix.operating_system }}
+    container: python:3.11
     steps:
       - name: get the code
         uses: actions/checkout@v4
@@ -43,6 +44,7 @@ jobs:
       matrix:
         operating_system: [ubuntu-latest,macOS-latest]
     runs-on: ${{ matrix.operating_system }}
+    container: python:3.11
     defaults:
       run:
         shell: bash
@@ -87,6 +89,7 @@ jobs:
       matrix:
         operating_system: [ubuntu-latest, windows-latest]
     runs-on: ${{matrix.operating_system}}
+    container: python:3.11
     needs: Build_and_upload_encryptions
     defaults:
       run:
