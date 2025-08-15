@@ -41,7 +41,7 @@ jobs:
     needs: test_code
     strategy:
       matrix:
-        operating_system: [ubuntu-latest, windows-latest]
+        operating_system: [ubuntu-latest,macOS-latest]
     runs-on: ${{ matrix.operating_system }}
     defaults:
       run:
