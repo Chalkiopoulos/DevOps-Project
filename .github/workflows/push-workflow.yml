@@ -4,14 +4,16 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - github-actions-showcase
     paths-ignore:
       - '*.md'
 
 jobs:
   test_code:
-    runs-on: ubuntu-latest
-    container: python:3.11
+    strategy:
+      matrix:
+        operating_system: [ubuntu-latest,macOS-latest]
+    runs-on: ${{ matrix.operating_system }}
     steps:
       - name: get the code
         uses: actions/checkout@v4
@@ -35,8 +37,10 @@ jobs:
       
   Build_and_upload_encryptions:  #encryptions work somewhat like a build that I upload as an artifact, here i also publish some output of the number of encryptiosn
     needs: test_code
-    runs-on: ubuntu-latest
-    container: python:3.11
+    strategy:
+      matrix:
+        operating_system: [ubuntu-latest,macOS-latest]
+    runs-on: ${{ matrix.operating_system }}
     defaults:
       run:
         shell: bash
@@ -77,8 +81,10 @@ jobs:
           echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
    
   download_and_show_artifact: # this job showcases how to download artiacts and also how to get outputs from another job
-    runs-on: ubuntu-latest
-    container: python:3.11
+    strategy:
+      matrix:
+        operating_system: [ubuntu-latest,macOS-latest]
+    runs-on: ${{ matrix.operating_system }}
     needs: Build_and_upload_encryptions
     defaults:
       run:
