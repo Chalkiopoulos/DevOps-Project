@@ -10,12 +10,7 @@ on:
 
 jobs:
   test_code:
-    strategy:
-      matrix:
-        operating_system: [ubuntu-latest]
-
-    environment: Testing
-    runs-on: ${{ matrix.operating_system }}
+    runs-on: ubuntu-latest
     container: python:3.11
     steps:
       - name: get the code
@@ -40,10 +35,7 @@ jobs:
       
   Build_and_upload_encryptions:  #encryptions work somewhat like a build that I upload as an artifact, here i also publish some output of the number of encryptiosn
     needs: test_code
-    strategy:
-      matrix:
-        operating_system: [ubuntu-latest]
-    runs-on: ${{ matrix.operating_system }}
+    runs-on: ubuntu-latest
     container: python:3.11
     defaults:
       run:
@@ -85,10 +77,7 @@ jobs:
           echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
    
   download_and_show_artifact: # this job showcases how to download artiacts and also how to get outputs from another job
-    strategy:
-      matrix:
-        operating_system: [ubuntu-latest]
-    runs-on: ${{matrix.operating_system}}
+    runs-on: ubuntu-latest
     container: python:3.11
     needs: Build_and_upload_encryptions
     defaults:
