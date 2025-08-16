@@ -40,7 +40,9 @@ for row in cursor.fetchall():
     )
 connection.commit()
 
-    
+cursor.execute("SELECT * FROM encryptions;")
+for row in cursor.fetchall():
+    print(row)
 
 # Cleanup
 cursor.close()
