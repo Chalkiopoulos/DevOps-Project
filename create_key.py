@@ -2,8 +2,10 @@ import cryptography
 from cryptography.fernet import Fernet
 import os
 
+
 def create_key():
 
+    
     if os.path.exists("filekey.key"):
         print("Key file already exists. Skipping key generation.")
         return
@@ -14,6 +16,10 @@ def create_key():
     with open("filekey.key", "wb") as key_file:
         key_file.write(key)
 
+    
     print("Key generated and saved to 'filekey.key'")
 
     print("Saving to:", os.getcwd())
+
+    return
+
