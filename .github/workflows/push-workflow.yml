@@ -53,12 +53,13 @@ jobs:
   
       - name: Wait for MySQL to be ready # mySQL sometimes needs time to setup so i wait before python script tries to connect
         run: sleep 10
+        
       - name: get the code
         uses: actions/checkout@v4
 
       - name: Load schema
         run: |
-          mysql -h db -uroot -p${{ secrets.DB_PASSWORD }} devopsdb < db/schema.sql
+          mysql -h db -uroot -p${{ secrets.DB_PASSWORD }} devopsdb < ./db/schema.sql
 
       - name: cache dependecies # caching the cryptography library to accelerate jobs
         uses: actions/cache@v4
