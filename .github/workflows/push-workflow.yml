@@ -38,12 +38,16 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: ${{secrets.DB_PASSWORD}}
+          MYSQL_DATABASE: devopsdb
+        ports:
+          - 3306:3306
+
     env:
       DB_HOST: db
-      DB_PORT: 3306
-      DB_USER: "root"
+      DB_PORT: "3306"
+      DB_USER: root
       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-      DB_NAME: "devopsdb"
+      DB_NAME: devopsdb
 
     steps:
       - name: dummy
