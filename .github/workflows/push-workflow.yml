@@ -40,8 +40,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: ${{secrets.DB_PASSWORD}}
           MYSQL_DATABASE: devopsdb
-        ports:
-          - 3306:3306
+          MYSQL_ROOT_HOST: '%'
+          
     env:
       DB_HOST: db
       DB_PORT: "3306"
