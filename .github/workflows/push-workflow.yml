@@ -41,7 +41,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: ${{secrets.DB_PASSWORD}}
           MYSQL_DATABASE: devopsdb
           MYSQL_ROOT_HOST: '%'
-          
+
     env:
       DB_HOST: db
       DB_PORT: "3306"
@@ -52,11 +52,7 @@ jobs:
     steps:
   
       - name: Wait for MySQL to be ready
-        run: |
-          until mysqladmin ping -h db -uroot -p${{secrets.DB_PASSWORD}} --silent; do
-            echo "Waiting for MySQL..."
-            sleep 2
-          done
+        run: sleep 10
       - name: get the code
         uses: actions/checkout@v4
 
