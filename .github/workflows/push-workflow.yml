@@ -27,7 +27,7 @@ jobs:
         run: pip install -r dependencies.txt
 
       - name: test code
-        run: python test.py
+        run: python Scripts/test.py
 
 
   test_DB:
@@ -51,7 +51,7 @@ jobs:
 
     steps:
   
-      - name: Wait for MySQL to be ready
+      - name: Wait for MySQL to be ready # mySQL sometimes needs time to setup so i wait before python script tries to connect
         run: sleep 10
       - name: get the code
         uses: actions/checkout@v4
@@ -70,7 +70,7 @@ jobs:
         run: pip install -r dependencies.txt
 
       - name: test Database 
-        run: python database_test.py
+        run: Scripts/python database_test.py
 
 
 
@@ -97,10 +97,10 @@ jobs:
         run: pip install -r dependencies.txt
 
       - name: make a key
-        run: python create_key.py
+        run: python Scripts/create_key.py
 
       - name: run code # create the encryptions
-        run: python main.py
+        run: python Scripts/main.py
       
       - name: check environment value
         run: echo ${{ vars.ENVIRONMENT_VALUE }}
