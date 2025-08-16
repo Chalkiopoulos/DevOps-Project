@@ -56,6 +56,9 @@ jobs:
         
       - name: get the code
         uses: actions/checkout@v4
+      
+      - name: testing if workflow works
+        run: python Scripts/test.py
 
       - name: Load schema
         run: |
