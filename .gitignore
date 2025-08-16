@@ -1,4 +1,4 @@
-filekey.key
 __pycache__/
 encrypted_passwords*.txt
 Dockerfile
+.env

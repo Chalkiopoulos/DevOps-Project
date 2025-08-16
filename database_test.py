@@ -1,13 +1,20 @@
 import mysql.connector
 from encryption import encrypt
+import pyfiglet
+import os
+import dotenv
+
+
+dotenv_path = dotenv.find_dotenv()
+dotenv.load_dotenv(dotenv_path)
 
 # Connect to the MySQL container
 connection = mysql.connector.connect(
-    host="localhost",      
-    port=3306,
-    user="root",
-    password="my_secret_pw",
-    database="devopsdb"
+    host=os.getenv("DB_HOST"),
+    port=os.getenv("DB_PORT"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME")
 )
 
 
@@ -38,3 +45,6 @@ connection.commit()
 # Cleanup
 cursor.close()
 connection.close()
+
+ascii_banner = pyfiglet.figlet_format("DATABASES ARE COOL")
+print(ascii_banner)
