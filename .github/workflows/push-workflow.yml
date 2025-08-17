@@ -46,7 +46,7 @@ jobs:
          # here the service container reads the schema from .db/schema on my repo and initializes the database
 
     env:
-      DB_HOST: services
+      DB_HOST: mysqldb
       DB_PORT: "3306"
       DB_USER: root
       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
