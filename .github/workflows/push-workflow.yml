@@ -33,7 +33,7 @@ jobs:
   test_DB:
     runs-on: ubuntu-latest
     environment: Testing
-    container: python:3.11
+    #container: python:3.11
     services:
       database:
         image: mysql:latest
@@ -45,7 +45,7 @@ jobs:
          # here the service container reads the schema from .db/schema on my repo and initializes the database
 
     env:
-      DB_HOST: database
+      DB_HOST: 127.0.0.1
       DB_PORT: "3306"
       DB_USER: root
       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
