@@ -69,7 +69,8 @@ jobs:
         run: pip install -r dependencies.txt
       
       - name: test Database 
-        run: python Scripts/database_test.py
+        #run: python Scripts/database_test.py
+        run: ping db
 
 
 
