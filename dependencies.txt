@@ -2,4 +2,3 @@ cryptography
 pyfiglet
 mysql-connector-python
 python-dotenv
-socket
