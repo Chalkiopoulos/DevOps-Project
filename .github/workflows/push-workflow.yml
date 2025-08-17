@@ -42,7 +42,7 @@ jobs:
         ports:
           - 3306:3306
         volumes:
-        - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+        - ./db/:/docker-entrypoint-initdb.d/schema.sql
          # here the service container reads the schema from .db/schema on my repo and initializes the database
 
     env:
@@ -59,7 +59,7 @@ jobs:
 
       - name: fix file permissions
         run: chmod +rw db/schema.sql
-        
+
       - name: get the code
         uses: actions/checkout@v4
 
