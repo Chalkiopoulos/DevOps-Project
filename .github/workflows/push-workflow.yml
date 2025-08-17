@@ -33,19 +33,20 @@ jobs:
   test_DB:
     runs-on: ubuntu-latest
     environment: Testing
-    container: python:3.11
     services:
       mysqldb:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: ${{secrets.DB_PASSWORD}}
           MYSQL_DATABASE: devopsdb
+        ports:
+          - 3306:3306
         volumes:
         - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
          # here the service container reads the schema from .db/schema on my repo and initializes the database
 
     env:
-      DB_HOST: mysqldb
+      DB_HOST: 127.0.0.1
       DB_PORT: "3306"
       DB_USER: root
       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
@@ -67,9 +68,6 @@ jobs:
 
       - name: install dependencies
         run: pip install -r dependencies.txt
-      
-      - name: Wait for MySQL to be ready # mySQL sometimes needs time to setup so i wait before python script tries to connect
-        run: sleep 10
 
       - name: test Database 
         run: python Scripts/database_test.py
