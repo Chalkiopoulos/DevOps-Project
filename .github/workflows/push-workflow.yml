@@ -35,7 +35,7 @@ jobs:
     environment: Testing
     container: python:3.11
     services:
-      db:
+      database:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: ${{secrets.DB_PASSWORD}}
@@ -45,7 +45,7 @@ jobs:
          # here the service container reads the schema from .db/schema on my repo and initializes the database
 
     env:
-      DB_HOST: db
+      DB_HOST: database
       DB_PORT: "3306"
       DB_USER: root
       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
@@ -68,6 +68,9 @@ jobs:
       - name: install dependencies
         run: pip install -r dependencies.txt
       
+      - name: Wait for MySQL to be ready # mySQL sometimes needs time to setup so i wait before python script tries to connect
+        run: sleep 10
+
       - name: test Database 
         run: python Scripts/database_test.py
 

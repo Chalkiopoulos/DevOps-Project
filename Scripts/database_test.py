@@ -5,8 +5,8 @@ import os
 import dotenv
 
 
-#dotenv_path = dotenv.find_dotenv()
-#dotenv.load_dotenv(dotenv_path)
+dotenv_path = dotenv.find_dotenv()
+dotenv.load_dotenv(dotenv_path)
 
 # Connect to the MySQL container
 connection = mysql.connector.connect(
