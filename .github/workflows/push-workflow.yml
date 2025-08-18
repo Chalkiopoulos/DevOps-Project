@@ -48,11 +48,7 @@ jobs:
           MYSQL_DATABASE: devopsdb
         volumes:
         - ./db/:/docker-entrypoint-initdb.d/schema.sql
-        
-         # here the service container reads the schema from .db/schema on my repo and initializes the database
-
-
-
+          here the service container reads the schema from .db/schema on my repo and initializes the database
     steps:
   
       - name: Wait for MySQL to be ready # mySQL sometimes needs time to setup so i wait before python script tries to connect
