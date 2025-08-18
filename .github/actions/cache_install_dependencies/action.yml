@@ -1,0 +1,14 @@
+name: Get and cache dependencies
+description: This action get dependencies from the dependencies.txt file and caches them to speed up the workflow.
+runs:
+  using: "composite"
+  steps:
+    - name: cache dependecies # caching the cryptography library to accelerate jobs
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: deps-${{ runner.os }}-${{ hashFiles('dependencies.txt') }}
+
+    - name: install dependencies
+      run: pip install -r dependencies.txt
+      shell: bash
