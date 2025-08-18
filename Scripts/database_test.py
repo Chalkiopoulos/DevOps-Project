@@ -31,7 +31,7 @@ except socket.error as e:
 
 # Connect to the MySQL container
 connection = mysql.connector.connect(
-    host=os.getenv("DB_HOST"),
+    host=os.getenv("mysqldb"),
     port=os.getenv("DB_PORT"),
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),
