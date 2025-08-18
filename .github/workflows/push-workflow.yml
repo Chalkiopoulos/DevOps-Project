@@ -64,11 +64,14 @@ jobs:
           path: ~/.cache/pip
           key: deps-${{ runner.os }}-${{ hashFiles('dependencies.txt') }}
 
-      - name: install dependencies
-        run: pip install -r dependencies.txt
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y mysql-client
 
       - name: Load schema and seed data
         run: mysql -h127.0.0.1 -uroot -p${{secrets.DB_PASSWORD}} devopsdb < ./db/schema.sql
+      
+      - name: install dependencies
+        run: pip install -r dependencies.txt
 
       - name: test Database 
         run: python Scripts/database_test.py
