@@ -68,8 +68,8 @@ jobs:
         run: apt-get update && apt-get install -y mariadb-client
 
       - name: Load schema and seed data
-        run: mysql -hmysqldb -uroot -p${{secrets.DB_PASSWORD}} devopsdb < ./db/schema.sql
-
+        run: mysql -hmysqldb -uroot -p${{secrets.DB_PASSWORD}} --ssl-mode=DISABLED devopsdb < ./db/schema.sql
+            #here I am connecting to service container (with SSL since TSL is not supported) to load testing data 
       - name: install dependencies
         run: pip install -r dependencies.txt
 
