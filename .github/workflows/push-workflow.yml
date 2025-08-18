@@ -46,14 +46,17 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: ${{secrets.DB_PASSWORD}}
           MYSQL_DATABASE: devopsdb
-        volumes:
-        - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+       # volumes:
+        #- ./db:/docker-entrypoint-initdb.d
          # If the initialization doesn't work the service container doesnt connect!!
          # here the service container reads the schema from .db/schema on my repo and initializes the database
     steps:
   
       - name: Wait for MySQL to be ready # mySQL sometimes needs time to setup so i wait before python script tries to connect
-        run: sleep 30
+        run: sleep 5
+
+      - name: Load schema and seed data
+        run: mysql -h127.0.0.1 -uroot -p${{secrets.DB_PASSWORD}} devopsdb < db/schema.sql
 
       - name: get the code
         uses: actions/checkout@v4
