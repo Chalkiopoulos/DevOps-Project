@@ -16,7 +16,7 @@ db_port = int(os.getenv("DB_PORT", "3306"))
 
 print(f"Trying to resolve host: {db_host}:{db_port}")
 
-try:
+"""try:
     ip = socket.gethostbyname(db_host)
     print(f" Host '{db_host}' resolves to {ip}")
 
@@ -28,10 +28,10 @@ except socket.gaierror as e:
     print(f" Hostname resolution failed for {db_host}: {e}")
 except socket.error as e:
     print(f" TCP connection to {db_host}:{db_port} failed: {e}")
-
+"""
 # Connect to the MySQL container
 connection = mysql.connector.connect(
-    host=os.getenv("mysqldb"),
+    host="mysqldb",
     port=os.getenv("DB_PORT"),
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),
