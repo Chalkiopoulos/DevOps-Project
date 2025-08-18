@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: Testing
     env:
-      DB_HOST: "mysqldb"
+      DB_HOST: mysqldb
       DB_PORT: "3306"
       DB_USER: root
       DB_PASSWORD: ${{secrets.DB_PASSWORD}}
@@ -56,7 +56,7 @@ jobs:
     steps:
   
       - name: Wait for MySQL to be ready # mySQL sometimes needs time to setup so i wait before python script tries to connect
-        run: sleep 10
+        run: sleep 30
 
       - name: get the code
         uses: actions/checkout@v4
