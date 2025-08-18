@@ -68,8 +68,8 @@ jobs:
         run: apt-get update && apt-get install -y mariadb-client
 
       - name: Load schema and seed data
-        run: mysql -h127.0.0.1 -uroot -p${{secrets.DB_PASSWORD}} devopsdb < ./db/schema.sql
-      
+        run: mysql -hmysqldb -uroot -p${{secrets.DB_PASSWORD}} devopsdb < ./db/schema.sql
+
       - name: install dependencies
         run: pip install -r dependencies.txt
 
