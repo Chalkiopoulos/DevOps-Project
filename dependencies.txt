@@ -1,5 +1,4 @@
 pyfiglet
 mysql-connector-python
 python-dotenv
-hashlib
 bcrypt
