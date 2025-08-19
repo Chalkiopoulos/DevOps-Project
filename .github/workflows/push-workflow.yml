@@ -57,7 +57,6 @@ jobs:
       - name: Load schema and seed data
         run: mysql -hmysqldb -uroot -p${{secrets.DB_PASSWORD}} --ssl=0 devopsdb < ./db/schema.sql
             #here I am connecting to service container (without secure connection) to load testing data
-
       - name: test Database 
         run: python Scripts/database_test.py
 
@@ -70,8 +69,6 @@ jobs:
     defaults:
       run:
         shell: bash
-    outputs: 
-      number_of_lines: ${{steps.counter.outputs.line_count}}
     steps:
       - name: get the code
         uses: actions/checkout@v4
