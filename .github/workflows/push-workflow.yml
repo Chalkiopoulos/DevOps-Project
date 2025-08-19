@@ -63,7 +63,7 @@ jobs:
 
 
 
-  Build_and_upload_encryptions:  #encryptions work somewhat like a build that I upload as an artifact, here i also publish some output of the number of encryptiosn
+  Build_and_upload_hashes:  #hashes work somewhat like a build that I upload as an artifact, here i also publish some output of the number of hashes
     needs: [test_encryption_code,test_DB]
     runs-on: ubuntu-latest
     container: python:3.11
@@ -79,49 +79,35 @@ jobs:
       - name: cache and install dependecies # caching the cryptography library to accelerate jobs
         uses: ./.github/actions/cache_install_dependencies # custom action that caches and installs dependencies
 
-      - name: make a key
-        run: python Scripts/create_key.py
-
-      - name: run code # create the encryptions
+      - name: run code # create a file of the hashes
         run: python Scripts/main.py
-      
-      - name: check environment value
-        run: echo ${{ vars.ENVIRONMENT_VALUE }}
-      
-      - name: upload the encryptions
+            
+      - name: upload the hash file
         uses: actions/upload-artifact@v4
         with:
-          name: 'encryptions-${{ runner.os}}'
-          path: ./encrypted_passwords*.txt
+          name: 'hashes-${{ runner.os}}'
+          path: ./hashed_passwords*.txt
 
-      - name: publish number of encryptions # I count the number of passwords encrypted to learn about github outputs
-        id: counter
-        run: |
-          line_count=$(cat ./encrypted_passwords*.txt | wc -l)
-          echo "line_count=$line_count" >> "$GITHUB_OUTPUT"
    
   download_and_show_artifact: # this job showcases how to download artiacts and also how to get outputs from another job
     runs-on: ubuntu-latest
     container: python:3.11
-    needs: Build_and_upload_encryptions
+    needs: Build_and_upload_hashes
     defaults:
       run:
         shell: bash
     steps:
-      - name: download encryptions
+      - name: download hashes
         uses: actions/download-artifact@v4
         with:
-          name: 'encryptions-${{ runner.os }}'
-      
-      - name: print number of lines from output
-        run: echo "this file contains ${{needs.Build_and_upload_encryptions.outputs.number_of_lines}} encrypted passwords"
-      
+          name: 'hashes-${{ runner.os }}'
+
       - name: print_contents
-        run: cat ./encrypted_passwords*.txt
+        run: cat ./hashed_passwords*.txt
 
   fail_report:
     runs-on: Ubuntu-latest
-    needs: [test_encryption_code,test_DB, Build_and_upload_encryptions,download_and_show_artifact]
+    needs: [test_encryption_code,test_DB, Build_and_upload_hashes,download_and_show_artifact]
     if: failure()
     steps:
       - name: print the full report

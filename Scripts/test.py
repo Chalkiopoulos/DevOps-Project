@@ -1,30 +1,35 @@
-from cryptography.fernet import Fernet
-from encryption import encrypt
-from encryption import decrypt
-from create_key import create_key
-from encryption_list import encrypt_list
-from encryption_list import decrypt_list
+import hashlib
+from hashing import hash_password, verify_password_hash
 import pyfiglet
 import os
-# this is a mock test to check if encryption is running fine before writing to the file
+# this is a mock test to check if hashing algorithms run fine
 
-create_key()
-with open("passwords.txt", "r") as f:       #reads the passwords
+with open("testing_passwords.txt", "r") as f:       #reads the passwords
     passwords = [line.strip() for line in f]
 
-C=[]
-P=[]
 
-print(passwords)
-C=encrypt_list(passwords)
-print(C)
-P = decrypt_list(C)
-print(P)
+test_password = "123456"
 
-if passwords!=P:
-    raise Exception("Encryption went wrong")
+bcrypt_hash = (hash_password(test_password, "bcrypt"))
+sha256_hash = (hash_password(test_password, "sha256"))
+md5_hash = (hash_password(test_password, "md5"))
 
-print("Encryption worked")
+bcrypt_verify = verify_password_hash(test_password, bcrypt_hash, "bcrypt")
+sha256_verify = verify_password_hash(test_password, sha256_hash, "sha256")
+md5_verify = verify_password_hash(test_password, md5_hash, "md5")
+
+
+assert bcrypt_verify and sha256_verify and md5_verify
+        
+for password in passwords:
+    print(f"Testing password: {password}")
+    bcrypt_hash = hash_password(password, "bcrypt")
+    sha256_hash = hash_password(password, "sha256")
+    md5_hash = hash_password(password, "md5")
+
+    assert verify_password_hash(password, bcrypt_hash, "bcrypt"), f"Bcrypt verification failed for {password}"
+    assert verify_password_hash(password, sha256_hash, "sha256"), f"SHA256 verification failed for {password}"
+    assert verify_password_hash(password, md5_hash, "md5"), f"MD5 verification failed for {password}"
 
 # this plays with the pyfiglet lib 
 

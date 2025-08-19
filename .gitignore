@@ -1,4 +1,4 @@
 __pycache__/
-encrypted_passwords*.txt
-Dockerfile
+README.md
 .env
+hashed_passwords.txt

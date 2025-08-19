@@ -1,8 +1,7 @@
 import mysql.connector
-from encryption import encrypt
+from hashing import hash_password
 import pyfiglet
 import os
-import socket
 import dotenv
 
 
@@ -16,19 +15,6 @@ db_port = int(os.getenv("DB_PORT", "3306"))
 
 print(f"Trying to resolve host: {db_host}:{db_port}")
 
-"""try:
-    ip = socket.gethostbyname(db_host)
-    print(f" Host '{db_host}' resolves to {ip}")
-
-    # Test TCP connection
-    with socket.create_connection((db_host, db_port), timeout=5):
-        print(f" Successfully connected to {db_host}:{db_port} at TCP level")
-
-except socket.gaierror as e:
-    print(f" Hostname resolution failed for {db_host}: {e}")
-except socket.error as e:
-    print(f" TCP connection to {db_host}:{db_port} failed: {e}")
-"""
 # Connect to the MySQL container
 connection = mysql.connector.connect(
     host=os.getenv("DB_HOST"),
@@ -39,31 +25,28 @@ connection = mysql.connector.connect(
 )
 
 
-    #load the key
-with open("filekey.key", "rb") as key_file:
-    enc_key = key_file.read()
-
 cursor = connection.cursor()
 
-cursor.execute("SELECT * FROM plaintexts;")
+with open("testing_passwords.txt", "r") as f:       #reads the passwords
+    passwords = [line.strip() for line in f]
 
 
+for password in passwords:
+    md5_hash = hash_password(password, "md5")
+    sha256_hash = hash_password(password, "sha256")
+    bcrypt_hash = hash_password(password, "bcrypt")
 
-# Fetch and print result
-for row in cursor.fetchall():
-    print(row[1]) # only want the the second element of the tuple that fetchall() returns
-    cyphertext=encrypt(row[1])  # Encrypt the plaintext value
-
-   # print(cyphertext)
     cursor.execute(
-        "INSERT INTO encryptions (plaintext_id, key_value, encryption_value) VALUES (%s, %s, %s)",
-        (row[0], enc_key, cyphertext)
+        "INSERT INTO weak_passwords (plaintext, md5_hash, sha256_hash, bcrypt_hash) VALUES (%s, %s, %s, %s)",
+        (password, md5_hash, sha256_hash, bcrypt_hash)
     )
 connection.commit()
 
-cursor.execute("SELECT * FROM encryptions;")
+cursor.execute("SELECT * FROM weak_passwords;")
 for row in cursor.fetchall():
     print(row)
+
+
 
 # Cleanup
 cursor.close()
